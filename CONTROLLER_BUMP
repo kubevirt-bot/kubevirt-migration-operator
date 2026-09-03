@@ -1,0 +1,29 @@
+diff --git a/api/migrationcontroller/v1alpha1/conditions.go b/api/migrationcontroller/v1alpha1/conditions.go
+index 0f6f11d..3654dfd 100644
+--- a/api/migrationcontroller/v1alpha1/conditions.go
++++ b/api/migrationcontroller/v1alpha1/conditions.go
+@@ -23,8 +23,9 @@ const (
+ 
+ // Types
+ const (
+-	InvalidPlanRef = "InvalidPlanRef"
+-	PlanNotReady   = "PlanNotReady"
++	InvalidPlanRef       = "InvalidPlanRef"
++	PlanNotReady         = "PlanNotReady"
++	ConflictingMigration = "ConflictingMigration"
+ )
+ 
+ // Reasons
+diff --git a/config/rbac/role.yaml b/config/rbac/role.yaml
+index c47bd06..04d1f6c 100644
+--- a/config/rbac/role.yaml
++++ b/config/rbac/role.yaml
+@@ -113,6 +113,8 @@ rules:
+   - migrations.kubevirt.io
+   resources:
+   - virtualmachinestoragemigrations/finalizers
++  - multinamespacevirtualmachinestoragemigrationplans/finalizers
++  - multinamespacevirtualmachinestoragemigrations/finalizers
+   verbs:
+   - update
+ - apiGroups:
